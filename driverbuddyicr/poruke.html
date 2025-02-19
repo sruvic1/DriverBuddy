@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poruke</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #777;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .message-card {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            text-align: left;
+        }
+
+        .message-card h3 {
+            margin: 0;
+            color: #f2a900;
+        }
+
+        .message-card p {
+            color: #ddd;
+            margin: 5px 0;
+        }
+
+        .reply-box {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reply-box textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+        }
+
+        .reply-box button {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f2a900;
+            border: none;
+            color: black;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .reply-box button:hover {
+            background-color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+    <header>Poruke</header>
+    <div class="container">
+        <div class="message-card">
+            <h3>Suljo Ruvic</h3>
+            <p>Pozdrav! Imam pitanje u vezi polaganja ispita, da li mogu zakazati čas vožnje za petak?</p>
+            
+            <div class="reply-box">
+                <textarea id="replyText" rows="3" placeholder="Unesite odgovor..."></textarea>
+                <button onclick="sendReply()">Pošalji odgovor</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function sendReply() {
+            let reply = document.getElementById("replyText").value;
+            if (reply.trim() !== "") {
+                alert("Odgovor poslan: " + reply);
+                document.getElementById("replyText").value = ""; 
+            } else {
+                alert("Unesite odgovor prije slanja.");
+            }
+        }
+    </script>
+</body>
+</html>

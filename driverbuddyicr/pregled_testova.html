@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregled testova</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #777;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .test-card {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .test-info {
+            text-align: left;
+        }
+
+        .test-card h3 {
+            margin: 0;
+            color: #f2a900;
+        }
+
+        .test-card p {
+            color: #ddd;
+            margin: 5px 0;
+        }
+
+        .result {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .pass {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .fail {
+            background-color: #D32F2F;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>Pregled testova</header>
+    <div class="container">
+        <div class="test-card">
+            <div class="test-info">
+                <h3>Teorijski test 1</h3>
+                <p>Datum polaganja: 12.02.2025.</p>
+                <p>Broj tačnih odgovora: 18/20</p>
+            </div>
+            <div class="result pass">Položeno ✅</div>
+        </div>
+
+        <div class="test-card">
+            <div class="test-info">
+                <h3>Teorijski test 2</h3>
+                <p>Datum polaganja: 08.02.2025.</p>
+                <p>Broj tačnih odgovora: 14/20</p>
+            </div>
+            <div class="result fail">Nije položeno ❌</div>
+        </div>
+
+        <div class="test-card">
+            <div class="test-info">
+                <h3>Praktični test</h3>
+                <p>Datum polaganja: 05.02.2025.</p>
+                <p>Ocjena instruktora: 9/10</p>
+            </div>
+            <div class="result pass">Položeno ✅</div>
+        </div>
+    </div>
+</body>
+</html>

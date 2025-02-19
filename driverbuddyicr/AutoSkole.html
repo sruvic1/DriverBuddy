@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Škole</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            background-color: #ecf0f1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h2 {
+            color: #d35400;
+        }
+
+        .school-list {
+            margin-top: 20px;
+        }
+
+        .school {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+
+<header>Auto Škole</header>
+
+<div class="container">
+    <label for="city">Odaberite grad:</label>
+    <select id="city" onchange="showSchools()">
+        <option value="">Izaberite grad...</option>
+        <option value="sarajevo">Sarajevo</option>
+        <option value="zenica">Zenica</option>
+        <option value="tuzla">Tuzla</option>
+        <option value="mostar">Mostar</option>
+        <option value="prijedor">Prijedor</option>
+        <option value="visoko">Visoko</option>
+    </select>
+
+    <div id="schoolList" class="school-list"></div>
+</div>
+
+<script>
+    const schools = {
+        sarajevo: [
+            { name: 'Auto škola Coach', url: 'https://coach.ba/' },
+            { name: 'Auto škola Lemi Force', url: 'https://lemiforce.ba/' },
+            { name: 'Auto škola Semafor', url: 'https://semaforsarajevo.com/' },
+        ],
+        zenica: [
+            { name: 'Auto škola Ajan', url: 'https://ajan.ba/' },
+            { name: 'Auto škola Muslic', url: 'https://www.facebook.com/autoskolamusliczenica/?locale=hr_HR' },
+        ],
+        tuzla: [
+            { name: 'Auto škola MS', url: 'https://www.facebook.com/AutoSkolaMS/?locale=hr_HR' },
+            { name: 'Auto škola Start', url: 'https://www.facebook.com/p/Auto-%C5%A1kola-START-Tuzla-100063880297910/' },
+        ],
+        mostar: [
+            { name: 'Auto škola Rotor', url: 'https://rotor.ba/cgi-sys/suspendedpage.cgi' },
+            { name: 'Auto škola Hercegovina', url: 'https://www.autoskola-hercegovina.com' },
+        ],
+        prijedor: [
+            { name: 'Auto škola Start', url: 'https://asstartprijedor.com/' },
+            { name: 'Auto škola Focus', url: 'https://www.facebook.com/autoskolafokus/?locale=hr_HR' },
+        ],
+        visoko: [
+            { name: 'Auto škola Smart', url: 'https://www.facebook.com/SmartVisoko/?locale=hr_HR' },
+            { name: 'Auto škola Karavdic', url: 'https://www.facebook.com/p/Auto%C5%A1kola-Karavdi%C4%87-Visoko-100046135136286/?locale=hr_HR' },
+        ],
+    };
+
+    function showSchools() {
+        const city = document.getElementById('city').value;
+        const schoolList = document.getElementById('schoolList');
+        
+        // Clear any existing school list
+        schoolList.innerHTML = '';
+
+        if (city && schools[city]) {
+            const citySchools = schools[city];
+            citySchools.forEach(school => {
+                const schoolDiv = document.createElement('div');
+                schoolDiv.classList.add('school');
+                schoolDiv.innerHTML = `<a href="${school.url}" target="_blank">${school.name}</a>`;
+                schoolList.appendChild(schoolDiv);
+            });
+        } else {
+            schoolList.innerHTML = '<p>Odaberite grad da biste vidjeli auto škole.</p>';
+        }
+    }
+</script>
+
+</body>
+</html>

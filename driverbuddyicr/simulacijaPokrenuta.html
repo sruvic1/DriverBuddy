@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacija Vozačkog Ispita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            text-align: left;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #34495e;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .test-question {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .result {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+
+        .failed {
+            color: red;
+        }
+
+        .passed {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<header>Simulacija Vozačkog Ispita</header>
+
+<div class="container" id="quiz-container">
+    <div id="question-container"></div>
+</div>
+
+<script>
+    const questions = [
+        { question: "Koji je maksimalni dozvoljeni brzinski limit u naselju?", options: ["50 km/h", "70 km/h", "90 km/h"], correct: 0 },
+        { question: "Ko ima prednost na raskrsnici bez znakova?", options: ["Vozilo sa desne strane", "Vozilo sa lijeve strane", "Vozilo koje ide pravo"], correct: 0 },
+        { question: "Šta znači crveno svjetlo na semaforu?", options: ["Vozi brzo", "Stani", "Nastavi ako nema auta"], correct: 1 },
+        { question: "Koja je minimalna dubina gazećeg sloja pneumatika?", options: ["1.6 mm", "2.0 mm", "3.0 mm"], correct: 0 },
+        { question: "Šta znači trougao sa crvenim rubom?", options: ["Obavijest", "Opasnost", "Zabrana"], correct: 1 },
+        { question: "Koliko promila alkohola je dozvoljeno za nove vozače?", options: ["0.0", "0.5", "0.3"], correct: 0 },
+        { question: "Šta radimo pri prolasku kroz školsku zonu?", options: ["Povećavamo brzinu", "Smanjujemo brzinu", "Ignorišemo znakove"], correct: 1 },
+        { question: "Kada koristimo duga svjetla?", options: ["U gradu", "Na otvorenom putu bez osvjetljenja", "U tunelu"], correct: 1 },
+        { question: "Kako se ponašamo na pješačkom prelazu?", options: ["Zaustavimo se ako pješak prelazi", "Ignorišemo pješake", "Zvučnim signalom ih upozorimo"], correct: 0 },
+        { question: "Šta znači znak STOP?", options: ["Stani i nastavi samo ako je sigurno", "Smanji brzinu", "Nema značenja"], correct: 0 }
+    ];
+
+    let currentQuestionIndex = 0;
+    let incorrectAnswers = 0;
+
+    function loadQuestion() {
+        const questionContainer = document.getElementById("question-container");
+        questionContainer.innerHTML = "";
+        
+        let questionObj = questions[currentQuestionIndex];
+        let questionElement = document.createElement("div");
+        questionElement.classList.add("test-question");
+        questionElement.innerHTML = `<p><b>Pitanje ${currentQuestionIndex + 1}:</b> ${questionObj.question}</p>`;
+        
+        questionObj.options.forEach((option, index) => {
+            let button = document.createElement("button");
+            button.innerText = option;
+            button.onclick = () => checkAnswer(index);
+            questionElement.appendChild(button);
+        });
+
+        questionContainer.appendChild(questionElement);
+    }
+
+    function checkAnswer(selectedIndex) {
+        let correctIndex = questions[currentQuestionIndex].correct;
+        if (selectedIndex !== correctIndex) {
+            incorrectAnswers++;
+        }
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = ""; // Brišemo sadržaj pitanja
+
+        const resultText = document.createElement("div");
+        resultText.classList.add("result");
+
+        if (incorrectAnswers >= 3) {
+            resultText.innerHTML = "😞 Nisi položio ispit! Previše netačnih odgovora.";
+            resultText.classList.add("failed");
+        } else {
+            resultText.innerHTML = "🎉 Položio si ispit!";
+            resultText.classList.add("passed");
+        }
+
+        quizContainer.appendChild(resultText);
+
+        const retryButton = document.createElement("button");
+        retryButton.innerText = "Ponovo pokreni";
+        retryButton.onclick = retryTest;
+        quizContainer.appendChild(retryButton);
+    }
+
+    function retryTest() {
+        location.reload();
+    }
+
+    loadQuestion();
+</script>
+</body>
+</html>

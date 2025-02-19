@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prijava - DriverBuddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #777;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Prijava</h2>
+        <input type="text" id="username" placeholder="Korisničko ime">
+        <input type="password" id="password" placeholder="Lozinka">
+        <button onclick="login()">Prijavi se</button>
+    </div>
+    
+    <script>
+        function login() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            
+            if (username === "korisnik" && password === "password") {
+                window.location.href = "korisnik.html";
+            } else if (username === "instruktor" && password === "password2") {
+                window.location.href = "instruktor.html";
+            } else {
+                alert("Pogrešno korisničko ime ili lozinka!");
+            }
+        }
+    </script>
+</body>
+</html>

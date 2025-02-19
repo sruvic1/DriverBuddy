@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulacija Prve Pomoći</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            text-align: left;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #34495e;
+            color: white;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #2c3e50;
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        .test-question {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .result {
+            font-size: 24px;
+            margin-top: 30px;
+        }
+
+        .failed {
+            color: red;
+        }
+
+        .passed {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<header>Simulacija Prve Pomoći</header>
+
+<div class="container" id="quiz-container">
+    <div id="question-container"></div>
+</div>
+
+<script>
+    const questions = [
+        { question: "Šta treba prvo uraditi kada naiđete na povrijeđenu osobu?", options: ["Provjeriti svijest i disanje", "Pozvati hitnu pomoć", "Paničariti"], correct: 0 },
+        { question: "Kako zaustaviti jako krvarenje?", options: ["Sterilnim zavojem i pritiskom", "Pustiti da slobodno krvari", "Koristiti alkohol"], correct: 0 },
+        { question: "Šta raditi kod gušenja stranim tijelom?", options: ["Heimlichov zahvat", "Položiti osobu na leđa", "Dati vode"], correct: 0 },
+        { question: "Kako prepoznati srčani udar?", options: ["Bol u grudima, kratak dah", "Glavobolja", "Svrab kože"], correct: 0 },
+        { question: "Šta učiniti kod nesvjesne osobe koja diše?", options: ["Staviti u bočni položaj", "Podići noge", "Odmah započeti reanimaciju"], correct: 0 },
+        { question: "Koji je pravilan omjer kompresija i vještačkog disanja kod CPR-a?", options: ["30:2", "15:1", "50:5"], correct: 0 },
+        { question: "Kako tretirati opekotine?", options: ["Hladnom vodom", "Mazati uljem", "Pokrivati vunom"], correct: 0 },
+        { question: "Kako postupiti kod loma kosti?", options: ["Imobilizovati povrijeđeni dio", "Pokušati vratiti kost na mjesto", "Ignorisati bol"], correct: 0 },
+        { question: "Kako pružiti prvu pomoć kod trovanja?", options: ["Pozvati hitnu pomoć", "Izazvati povraćanje bez savjeta doktora", "Dati alkohol"], correct: 0 },
+        { question: "Šta raditi kod ugriza zmije?", options: ["Mirno držati povrijeđeni dio", "Isisati otrov", "Hodati što brže"], correct: 0 }
+    ];
+
+    let currentQuestionIndex = 0;
+    let incorrectAnswers = 0;
+
+    function loadQuestion() {
+        const questionContainer = document.getElementById("question-container");
+        questionContainer.innerHTML = "";
+        
+        let questionObj = questions[currentQuestionIndex];
+        let questionElement = document.createElement("div");
+        questionElement.classList.add("test-question");
+        questionElement.innerHTML = `<p><b>Pitanje ${currentQuestionIndex + 1}:</b> ${questionObj.question}</p>`;
+        
+        questionObj.options.forEach((option, index) => {
+            let button = document.createElement("button");
+            button.innerText = option;
+            button.onclick = () => checkAnswer(index);
+            questionElement.appendChild(button);
+        });
+
+        questionContainer.appendChild(questionElement);
+    }
+
+    function checkAnswer(selectedIndex) {
+        let correctIndex = questions[currentQuestionIndex].correct;
+        if (selectedIndex !== correctIndex) {
+            incorrectAnswers++;
+        }
+
+        currentQuestionIndex++;
+
+        if (currentQuestionIndex < questions.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        const quizContainer = document.getElementById("quiz-container");
+        quizContainer.innerHTML = "";
+        
+        const resultText = document.createElement("div");
+        resultText.classList.add("result");
+
+        if (incorrectAnswers >= 3) {
+            resultText.innerHTML = "😞 Nisi položio test iz prve pomoći!";
+            resultText.classList.add("failed");
+        } else {
+            resultText.innerHTML = "🎉 Položio si test iz prve pomoći!";
+            resultText.classList.add("passed");
+        }
+
+        quizContainer.appendChild(resultText);
+
+        const retryButton = document.createElement("button");
+        retryButton.innerText = "Ponovo pokreni";
+        retryButton.onclick = retryTest;
+        quizContainer.appendChild(retryButton);
+    }
+
+    function retryTest() {
+        location.reload();
+    }
+
+    loadQuestion();
+</script>
+</body>
+</html>

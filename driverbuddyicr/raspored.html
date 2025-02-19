@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raspored časova</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #777;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #444;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #555;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+        }
+
+        .add-class {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #555;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-class:hover {
+            background-color: #666;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            background-color: #444;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <header>Raspored časova vožnje</header>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Vrijeme</th>
+                    <th>Učenik</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody id="schedule-table">
+                <tr>
+                    <td>20.02.2025</td>
+                    <td>10:00 - 11:00</td>
+                    <td>Marko Petrović</td>
+                    <td><button onclick="removeRow(this)">Obriši</button></td>
+                </tr>
+                <tr>
+                    <td>21.02.2025</td>
+                    <td>12:00 - 13:00</td>
+                    <td>Ivana Kovačević</td>
+                    <td><button onclick="removeRow(this)">Obriši</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="form-container">
+            <h3>Dodaj novi čas</h3>
+            <input type="date" id="date">
+            <input type="time" id="time">
+            <input type="text" id="student" placeholder="Ime učenika">
+            <button class="add-class" onclick="addClass()">Dodaj</button>
+        </div>
+    </div>
+
+    <script>
+        function addClass() {
+            var date = document.getElementById("date").value;
+            var time = document.getElementById("time").value;
+            var student = document.getElementById("student").value;
+
+            if (date && time && student) {
+                var table = document.getElementById("schedule-table");
+                var row = table.insertRow();
+                row.innerHTML = `<td>${date}</td><td>${time}</td><td>${student}</td>
+                                 <td><button onclick="removeRow(this)">Obriši</button></td>`;
+            } else {
+                alert("Molimo unesite sve podatke.");
+            }
+        }
+
+        function removeRow(button) {
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+</html>

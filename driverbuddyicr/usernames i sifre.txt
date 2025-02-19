@@ -1,0 +1,11 @@
+Usernames i sifre:
+
+Instruktor:
+ime:instruktor
+
+pass:password2
+
+korisnik:
+ime:korisnik
+
+pass:password
